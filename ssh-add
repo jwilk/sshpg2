@@ -26,9 +26,11 @@ then
     exec /usr/bin/ssh-add "$@"
 fi
 
-for file in ~/.ssh/key-*.gpg
+for pubkey in ~/.ssh/*.pub
 do
-    gpg -q -d < $file | /usr/bin/ssh-add /dev/stdin
+    seckey="${pubkey%.pub}.gpg"
+    [ -e "$seckey" ] || continue
+    gpg -q -d < $seckey | /usr/bin/ssh-add /dev/stdin
 done
 
 # vim:ts=4 sts=4 sw=4 et
