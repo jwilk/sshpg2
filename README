@@ -23,4 +23,4 @@ Why don't just set passphrase in ``ssh-keygen``?
 What does the name stand for?
    **SSH** keys protected by Gnu\ **PG**, attempt #\ **2**
 
-.. vim:tw=76 ts=3 sts=3 sw=3 et
+.. vim:tw=76 ts=3 sts=3 sw=3 et ft=rst
