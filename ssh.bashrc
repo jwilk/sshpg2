@@ -4,7 +4,7 @@
 agent=$(ssh-agent -a ~/.ssh/agent.socket 2>/dev/null) || {
     . ~/.ssh/agent.vars
 }
-eval $agent > /dev/null
+eval "$agent" > /dev/null
 cat > ~/.ssh/agent.vars <<EOF
 export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
 export SSH_AGENT_PID=$SSH_AGENT_PID
