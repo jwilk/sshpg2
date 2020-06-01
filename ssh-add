@@ -5,16 +5,21 @@
 
 set -e -u
 
+orig_ssh_add=$(command -v -p ssh-add) || {
+    printf 'ssh-add: command not found\n' >&2
+    exit 127
+}
+
 if [ $# != 0 ]
 then
-    exec /usr/bin/ssh-add "$@"
+    exec "$orig_ssh_add" "$@"
 fi
 
 for pubkey in ~/.ssh/*.pub
 do
     seckey="${pubkey%.pub}.gpg"
     [ -e "$seckey" ] || continue
-    gpg -q -d < "$seckey" | /usr/bin/ssh-add /dev/stdin
+    gpg -q -d < "$seckey" | "$orig_ssh_add" /dev/stdin
 done
 
 # vim:ts=4 sts=4 sw=4 et
